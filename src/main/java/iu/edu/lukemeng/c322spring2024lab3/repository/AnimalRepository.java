@@ -48,4 +48,32 @@ public class AnimalRepository {
         return result;
 
     }
+
+    public List<AnimalData> find(String name, String picture, String location) throws IOException {
+        List<AnimalData> result = new ArrayList<>();
+        Path path = Paths.get(DATABASE_NAME);
+        List<String> data = Files.readAllLines(path);
+
+        List<AnimalData> allData = findAll();
+        for(AnimalData animalData : allData){
+            boolean matches = true;
+            if(name != null && !name.equalsIgnoreCase(animalData.getName())){
+                matches = false;
+            }
+            if(picture != null && !picture.equalsIgnoreCase(animalData.getPicture())){
+                matches = false;
+            }
+            if(location != null && !location.equalsIgnoreCase(animalData.getLocation())){
+                matches = false;
+            }
+
+            if(matches){
+                result.add(animalData);
+            }
+        }
+        return result;
+
+
+
+    }
 }

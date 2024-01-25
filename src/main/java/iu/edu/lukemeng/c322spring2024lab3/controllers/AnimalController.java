@@ -33,5 +33,17 @@ public class AnimalController {
         }
     }
 
+    @GetMapping("/search")
+    public List<AnimalData> search(@RequestParam String name, @RequestParam String picture, @RequestParam String location){
+        try{
+            System.out.println(name);
+            System.out.println(picture);
+            System.out.println(location);
+            return animalRepository.find(name, picture, location);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
 
 }
